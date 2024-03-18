@@ -1,0 +1,79 @@
+import 'dart:io';
+
+// Interface definition
+abstract class Animal {
+  void makeSound();
+}
+
+// Base class
+class AnimalBase {
+  void eat() {
+    print('Animal is eating.');
+  }
+}
+
+// Class implementing an interface and inheriting from a base class
+class Dog extends AnimalBase implements Animal {
+  @override
+  void makeSound() {
+    print('Woof!');
+  }
+
+  void fetch() {
+    print('Dog is fetching.');
+  }
+}
+
+// Class that overrides an inherited method
+class Cat extends AnimalBase implements Animal {
+  @override
+  void makeSound() {
+    print('Meow!');
+  }
+
+  @override
+  void eat() {
+    print('Cat is eating.');
+  }
+}
+
+// Class to initialize an instance with data from a file
+class Person {
+  late String name;
+
+  Person(this.name);
+
+  void introduce() {
+    print('Hello, my name is $name.');
+  }
+
+  factory Person.fromFile(String filePath) {
+    // Assume the file contains a single line with the person's name
+    String name = File(filePath).readAsStringSync().trim();
+    return Person(name);
+  }
+}
+
+void main() {
+  // Creating instances
+  Dog dog = Dog();
+  Cat cat = Cat();
+
+  // Demonstrating inheritance and method overriding
+  dog.eat(); // Inherited method from AnimalBase
+  dog.makeSound(); // Implemented method from Animal interface
+  dog.fetch(); // Method specific to Dog class
+
+  cat.eat(); // Overridden method from AnimalBase
+  cat.makeSound(); // Implemented method from Animal interface
+
+  // Initializing instance from file
+  Person person = Person.fromFile('person.txt');
+  person.introduce();
+
+  // Demonstrating loop
+  print('Counting from 1 to 5:');
+  for (int i = 1; i <= 5; i++) {
+    print(i);
+  }
+}
